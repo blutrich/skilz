@@ -13,3 +13,10 @@ coverage/
 
 # Private skills - not for public repo
 .claude/skills/climbing-training-builder/
+
+# Personal/private files - not relevant to skill-builder repo
+climbing-training-builder.zip
+docs/linkedin-skilz-announcement.md
+GA-BUGS-AND-FIXES.md
+test-ga-bugs.js
+test-ga-real-impact.js
