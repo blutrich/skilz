@@ -230,6 +230,20 @@ npm run validate .claude/skills/json-formatter
 # ✓ All validations passed!
 ```
 
+### Package for Claude Web
+
+To use a skill with Claude web (claude.ai), create a properly structured zip file:
+
+```
+You: Package this skill for Claude web
+
+Claude: [Creates zip with SKILL.md at top level, not nested]
+```
+
+**Key requirement**: SKILL.md must be at the **top level** of the zip file.
+
+See [docs/packaging-for-claude-web.md](docs/packaging-for-claude-web.md) for complete packaging guide.
+
 ## Using Templates Directly
 
 You can also copy templates manually:

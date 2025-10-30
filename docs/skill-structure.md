@@ -133,6 +133,47 @@ Shared with team via git.
 
 Available across all projects for current user.
 
+### Claude Web (claude.ai)
+
+**CRITICAL**: For Claude web, SKILL.md must be at the **top level** of the zip file, not nested in subdirectories.
+
+**Correct structure:**
+```
+skill-name.zip
+├── SKILL.md              ← Top level (required)
+├── supporting-file.md
+├── reference.md
+└── scripts/
+    └── helper.py
+```
+
+**Incorrect structure:**
+```
+skill-name.zip
+└── .claude/              ← Don't nest in .claude/
+    └── skills/
+        └── skill-name/
+            └── SKILL.md  ← Won't work!
+```
+
+**Creating the zip:**
+```bash
+# Navigate INTO the skill directory
+cd /path/to/skill-name/
+
+# Create zip with files at top level
+zip -r skill-name.zip . -x ".*"
+
+# Verify SKILL.md is at root
+unzip -l skill-name.zip | head -10
+```
+
+**Verification checklist:**
+- [ ] SKILL.md appears at root level in `unzip -l` output
+- [ ] No nested `.claude/skills/` directories
+- [ ] All supporting files at top level
+- [ ] Zip named descriptively (e.g., `pdf-processing.zip`)
+
 ## Content Guidelines
 
 ### SKILL.md Length

@@ -6,6 +6,7 @@ Comprehensive guides for understanding and building Claude Code skills.
 
 - **[Best Practices Guide](best-practices-guide.md)** - Complete guide to writing effective skills
 - **[Skill Structure](skill-structure.md)** - Technical specifications and requirements
+- **[Packaging for Claude Web](packaging-for-claude-web.md)** - Creating zip files for claude.ai
 - **[Progressive Disclosure](progressive-disclosure.md)** - Organizing content for efficient loading
 - **[Workflows and Feedback](workflows-and-feedback.md)** - Multi-step processes and validation loops
 - **[Testing and Evaluation](testing-and-evaluation.md)** - How to test and iterate on skills
