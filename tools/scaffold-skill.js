@@ -30,6 +30,30 @@ async function main() {
   console.log('Skill Scaffolding Tool');
   console.log('='.repeat(50) + '\n');
 
+  // Check if we're in the skilz repo - warn users
+  const currentDir = process.cwd();
+  const isSkilzRepo = fs.existsSync(path.join(currentDir, '.claude', 'skills', 'skill-builder'));
+
+  if (isSkilzRepo && currentDir.includes('skilz')) {
+    console.log('⚠️  WARNING: You appear to be in the skilz guidelines repository!');
+    console.log('');
+    console.log('This repository is for GUIDELINES ONLY, not specific skills.');
+    console.log('');
+    console.log('Your skill should be created in:');
+    console.log('  - Your project: ~/projects/my-app/.claude/skills/');
+    console.log('  - Personal: ~/.claude/skills/');
+    console.log('  - Separate repo: ~/projects/my-skill/');
+    console.log('');
+    const proceed = await question('Continue anyway? (yes/no): ');
+    if (proceed.toLowerCase() !== 'yes') {
+      console.log('\nSuggestion: Navigate to your project first, then run this tool.');
+      console.log('Example: cd ~/projects/my-app && node ~/projects/skilz/tools/scaffold-skill.js\n');
+      rl.close();
+      return;
+    }
+    console.log('');
+  }
+
   // Get skill name
   const name = await question('Skill name (lowercase-with-hyphens): ');
 
@@ -82,18 +106,37 @@ async function main() {
 
   // Choose location
   console.log('\nWhere to create skill:');
-  console.log('1. .claude/skills/ (project-specific)');
+  console.log('1. .claude/skills/ (project-specific - in current directory)');
   console.log('2. ~/.claude/skills/ (personal, all projects)');
+  console.log('3. Custom path');
 
-  const locationChoice = await question('\nChoose location (1-2): ');
+  const locationChoice = await question('\nChoose location (1-3): ');
 
   let baseDir;
   if (locationChoice === '1') {
     baseDir = '.claude/skills';
+    console.log(`\nℹ️  Will create in: ${path.resolve(baseDir)}`);
   } else if (locationChoice === '2') {
     baseDir = path.join(process.env.HOME, '.claude', 'skills');
+    console.log(`\nℹ️  Will create in: ${baseDir}`);
+  } else if (locationChoice === '3') {
+    baseDir = await question('Enter full path (e.g., ~/projects/my-app/.claude/skills): ');
+    baseDir = baseDir.replace('~', process.env.HOME);
+    console.log(`\nℹ️  Will create in: ${path.resolve(baseDir)}`);
   } else {
     console.log('✗ Invalid location choice.');
+    rl.close();
+    return;
+  }
+
+  // Final safety check - prevent creating in skilz repo
+  const resolvedPath = path.resolve(baseDir);
+  if (resolvedPath.includes('skilz') && resolvedPath.includes('skill-builder')) {
+    console.log('\n❌ ERROR: Cannot create specific skills in the skilz guidelines repository!');
+    console.log('');
+    console.log('This path appears to be inside the skilz repo.');
+    console.log('Specific skills must be created elsewhere.');
+    console.log('');
     rl.close();
     return;
   }

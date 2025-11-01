@@ -1,6 +1,8 @@
 # Skilz Documentation
 
-Comprehensive guides for understanding and building Claude Code skills.
+Comprehensive guidelines and best practices for building Claude Code skills.
+
+**Note**: This repository contains **guidelines only**, not specific skill implementations. Use these guidelines to create skills that belong in your own projects or separate repositories.
 
 ## Quick Navigation
 
@@ -91,9 +93,10 @@ For quality-critical work:
 
 2. **Claude generates** a properly structured skill using the skill-builder
 
-3. **Save the skill** to:
-   - `.claude/skills/[name]/` (project-specific)
+3. **Save the skill** to your own repository:
+   - `your-project/.claude/skills/[name]/` (project-specific)
    - `~/.claude/skills/[name]/` (personal, all projects)
+   - **NOT** in this skilz repository - it's for guidelines only
 
 4. **Test the skill**:
    ```bash

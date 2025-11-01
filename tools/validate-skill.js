@@ -23,6 +23,21 @@ class SkillValidator {
   validate() {
     console.log(`\nValidating skill at: ${this.skillPath}\n`);
 
+    // Check if we're accidentally validating a skill in the skilz repo
+    const resolvedPath = path.resolve(this.skillPath);
+    const isSkilzRepo = resolvedPath.includes('skilz') &&
+                       !resolvedPath.includes('skill-builder') &&
+                       resolvedPath.includes('.claude/skills');
+
+    if (isSkilzRepo) {
+      const skillName = path.basename(this.skillPath);
+      if (skillName !== 'skill-builder') {
+        this.warnings.push('⚠️  This skill appears to be in the skilz guidelines repository!');
+        this.warnings.push('   Specific skills should be in your project, not in skilz repo.');
+        this.warnings.push('   Move to: your-project/.claude/skills/ or ~/.claude/skills/');
+      }
+    }
+
     // Check if directory exists
     if (!fs.existsSync(this.skillPath)) {
       this.errors.push(`Skill directory does not exist: ${this.skillPath}`);

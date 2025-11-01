@@ -11,12 +11,12 @@ coverage/
 *.swo
 *~
 
-# Private skills - not for public repo
-.claude/skills/climbing-training-builder/
+# Specific skill implementations - this repo is for guidelines only
+# DO NOT commit specific skills here - they belong in their own repos
+.claude/skills/*/
+!.claude/skills/skill-builder/
 
 # Personal/private files - not relevant to skill-builder repo
-climbing-training-builder.zip
 docs/linkedin-skilz-announcement.md
-GA-BUGS-AND-FIXES.md
-test-ga-bugs.js
-test-ga-real-impact.js
+*.zip
+test-*.js

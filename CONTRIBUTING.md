@@ -1,6 +1,22 @@
 # Contributing to Skilz
 
-We welcome contributions! Here's how to help improve the skill-builder repository.
+We welcome contributions! This is a **guidelines-only repository** for building Claude Code skills.
+
+## Important: What This Repository Is
+
+This repository contains:
+- ✅ **Guidelines** for writing effective skills
+- ✅ **Best practices** documentation
+- ✅ **Templates** demonstrating patterns (not solving specific problems)
+- ✅ **Examples** showing best practices (not production skills)
+- ✅ **Validation tools** for checking skill quality
+
+This repository does **NOT** contain:
+- ❌ Specific skill implementations (SQL analyzers, PDF processors, etc.)
+- ❌ Domain-specific production skills
+- ❌ Personal or project-specific skills
+
+**If you built a great skill**: Create a separate repository for it or include it in your project. Do not submit it here.
 
 ## What Can You Contribute?
 
@@ -20,9 +36,11 @@ Found a useful skill pattern not covered by existing templates?
 - Documentation patterns (specific styles or formats)
 - Deployment patterns (specific platforms or strategies)
 
-### 2. Example Skills
+### 2. Example Skills (Educational Only)
 
-Built a great skill you want to share?
+Want to add an example that demonstrates best practices?
+
+**Important**: Examples must be **educational**, not production skills. They should demonstrate **patterns**, not solve real-world problems.
 
 **Steps:**
 1. Create directory in `examples/`
@@ -30,14 +48,20 @@ Built a great skill you want to share?
 3. Add README.md with:
    - Design decisions
    - Why it demonstrates best practices
-   - Usage examples
+   - What pattern it shows
    - Testing scenarios
 4. Ensure it passes validation
 
 **Good examples:**
-- Domain-specific skills (finance, legal, healthcare)
-- Framework-specific skills (React, Django, Spring)
-- Tool-specific skills (Docker, Kubernetes, CI/CD)
+- Demonstrating progressive disclosure pattern
+- Showing workflow pattern with validation
+- Illustrating tool restrictions
+- Teaching conciseness principles
+
+**Not acceptable:**
+- Production-ready SQL query builders
+- Actual PDF processors for use
+- Real code analyzers meant for daily use
 
 ### 3. Documentation Improvements
 

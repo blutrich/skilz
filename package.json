@@ -1,7 +1,7 @@
 {
   "name": "skilz",
   "version": "1.0.0",
-  "description": "Automated skill builder for Claude Code - describe a skill and get a best-practice-compliant implementation",
+  "description": "Guidelines and templates for building Claude Code skills - meta-repository containing best practices, patterns, and validation tools",
   "main": "index.js",
   "scripts": {
     "validate": "node tools/validate-skill.js",

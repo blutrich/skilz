@@ -9,46 +9,74 @@
 
 ## What is This?
 
-Skilz is a **meta-repository** that teaches Claude Code how to write high-quality skills. It contains:
+Skilz is a **guidelines repository** that teaches Claude Code how to write high-quality skills. It contains:
 
-1. **skill-builder skill** - A skill that Claude loads to learn how to write skills
+1. **skill-builder skill** - A meta-skill that Claude loads to learn how to write skills
 2. **Comprehensive evaluations** - 12 test cases to validate skill quality
 3. **Comprehensive templates** - 8 ready-to-use skill patterns
-4. **Complete examples** - Production-quality skills demonstrating best practices
+4. **Complete examples** - Production-quality skill examples demonstrating best practices
 5. **Validation tools** - Automated checking of skill requirements
 6. **Full documentation** - Everything you need to understand skills
 
+**Note**: This repository contains **only the guidelines and tools** for building skills. It does **not** contain specific skill implementations. The skills you create using this repository should be tracked in their own repositories or in your project's `.claude/skills/` directory.
+
 ## Quick Start
 
-### 1. Install Dependencies
+### 1. Clone and Install
 
 ```bash
+# Clone the guidelines repository
+git clone <your-repo-url> skilz
 cd skilz
 npm install
 ```
 
-### 2. Use Claude Code to Build a Skill
+### 2. Understand the Organization
 
-Claude Code will automatically load the skill-builder skill and generate properly structured skills:
+**Important**: This repo contains **guidelines only**. Your skills go elsewhere:
+
+- **Project skills**: `your-project/.claude/skills/`
+- **Personal skills**: `~/.claude/skills/`
+- **Team skills**: `team-skills/.claude/skills/`
+
+See [SETUP.md](SETUP.md) for complete setup guide.
+
+### 3. Create Your First Skill (In the Right Place!)
+
+Navigate to **your project** (NOT the skilz repo):
+
+```bash
+cd ~/projects/my-app  # Your actual project
+```
+
+Ask Claude to create a skill:
 
 ```
 You: Create a skill for analyzing SQL query performance
 
 Claude: I'll create a skill for SQL query performance analysis...
-[Generates complete skill with proper YAML frontmatter, structure, and content]
+[Creates: my-app/.claude/skills/sql-analyzer/SKILL.md] ✅
 ```
 
-That's it! Claude Code reads the skill-builder skill and knows how to:
-- Structure YAML frontmatter correctly
-- Write effective descriptions with triggers
-- Apply appropriate patterns (analysis, workflow, etc.)
-- Use progressive disclosure when needed
-- Follow all best practices
+Claude Code automatically:
+- Loads skill-builder guidelines from skilz repo
+- Structures YAML frontmatter correctly
+- Writes effective descriptions with triggers
+- Applies appropriate patterns (analysis, workflow, etc.)
+- Uses progressive disclosure when needed
+- Follows all best practices
 
-### 3. Validate Your Skill
+**Result**: Skill is created in YOUR project, not in skilz ✅
+
+### 4. Validate Your Skill
 
 ```bash
-npm run validate .claude/skills/sql-analyzer
+# From your project directory
+node ~/projects/skilz/tools/validate-skill.js .claude/skills/sql-analyzer
+
+# Or use npm script from skilz repo
+cd ~/projects/skilz
+npm run validate ~/projects/my-app/.claude/skills/sql-analyzer
 ```
 
 Output:
@@ -60,9 +88,15 @@ Output:
 ✓ All validations passed!
 ```
 
-### 4. Use Your Skill
+### 5. Use Your Skill
 
-Your skill is now ready! Claude Code will automatically use it when relevant.
+Your skill is now ready! When you're in your project directory, Claude Code automatically uses it when relevant.
+
+## Important Links
+
+- **[SETUP.md](SETUP.md)** - Complete setup and organization guide
+- **[DIRECTORY-STRUCTURE.md](DIRECTORY-STRUCTURE.md)** - Where to put skills
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute to guidelines
 
 ## How It Works
 
@@ -102,13 +136,13 @@ Create a skill for reviewing API designs
 ## Repository Structure
 
 ```
-skilz/
-├── README.md (You are here)
-├── package.json (Node.js tooling)
+skilz/                               # GUIDELINES REPOSITORY
+├── README.md                        # You are here
+├── package.json                     # Node.js tooling
 │
 ├── .claude/
 │   └── skills/
-│       └── skill-builder/           # THE META-SKILL
+│       └── skill-builder/           # THE META-SKILL (guidelines)
 │           ├── SKILL.md             # Main skill teaching Claude
 │           ├── EVALUATIONS.md       # Testing guide
 │           ├── evaluations.json     # 12 test cases
@@ -145,6 +179,11 @@ skilz/
     ├── lint-skill.js
     └── test-skill.js
 ```
+
+**Note**: This structure contains **only guidelines and templates**. Your actual skills should be created in:
+- **Project skills**: `your-project/.claude/skills/your-skill/`
+- **Personal skills**: `~/.claude/skills/your-skill/`
+- **Separate repositories**: For skills you want to share independently
 
 ## What Makes Skills Effective?
 
@@ -471,7 +510,7 @@ Yes! Generated skills are starting points. Edit them to fit your specific needs.
 
 ### How do I share skills with my team?
 
-Put skills in `.claude/skills/` in your project repository. Anyone who clones the repo gets the skills.
+Put skills in `.claude/skills/` in your project repository. Anyone who clones the repo gets the skills. Do **not** commit specific skills to this skilz repository - it's only for guidelines.
 
 ### What if validation fails?
 
